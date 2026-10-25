@@ -1,1 +1,92 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #25243a;
+  background: #faf9ff;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 2px 10px #0000000d;
+}
+
+nav a {
+  color: #635bdb;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+nav a:hover {
+  background: #f0efff;
+}
+
+.home,
+.page {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 24px;
+}
+
+.home {
+  text-align: center;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.home h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.eyebrow {
+  color: #635bdb;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 450px;
+  margin-top: 24px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dedcf0;
+  border-radius: 8px;
+  font: inherit;
+}
+
+button,
+.primary-button {
+  display: inline-block;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #635bdb;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover,
+.primary-button:hover {
+  background: #4c43c4;
+}

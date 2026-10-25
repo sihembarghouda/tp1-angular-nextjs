@@ -1,0 +1,74 @@
+
+<main class="catalogue">
+  <header class="catalogue-header">
+    <p class="eyebrow">BOUTIQUE SHOPNOW</p>
+    <h1>Catalogue des produits</h1>
+    <p class="subtitle">
+      Découvre notre sélection de produits et trouve ce qu’il te faut.
+    </p>
+  </header>
+
+  <p *ngIf="loading" class="status-message">
+    Chargement des produits...
+  </p>
+
+  <p *ngIf="error" class="error-message" role="alert">
+    {{ error }}
+  </p>
+
+  <ng-container *ngIf="!loading && !error">
+    <p class="results-count">
+      {{ total }} produits disponibles — Page {{ page }} sur {{ totalPages }}
+    </p>
+
+    <div class="product-grid">
+      <article class="product-card" *ngFor="let product of products">
+
+        <div class="product-image">
+          <img
+            [src]="product.thumbnail"
+            [alt]="product.title"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="product-info">
+          <span class="product-category">
+            {{ product.category }}
+          </span>
+
+          <h2>{{ product.title }}</h2>
+
+          <p class="product-description">
+            {{ product.description }}
+          </p>
+
+          <div class="product-footer">
+            <strong class="product-price">
+              {{ product.price | number:'1.2-2' }} $
+            </strong>
+          </div>
+        </div>
+
+      </article>
+    </div>
+
+    <nav class="pagination" aria-label="Pagination du catalogue">
+      <button
+        type="button"
+        (click)="previousPage()"
+        [disabled]="page === 1">
+        ← Précédent
+      </button>
+
+      <span>Page {{ page }} / {{ totalPages }}</span>
+
+      <button
+        type="button"
+        (click)="nextPage()"
+        [disabled]="page >= totalPages">
+        Suivant →
+      </button>
+    </nav>
+  </ng-container>
+</main>

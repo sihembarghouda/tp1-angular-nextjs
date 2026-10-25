@@ -14,7 +14,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      <head>
+        <title>{typeof metadata.title === "string" ? metadata.title : "ShopNow | Catalogue de produits"}</title>
+        <meta
+          name="description"
+          content={typeof metadata.description === "string" ? metadata.description : undefined}
+        />
+      </head>
+      <body>
+      
+        {children}
+      </body>
     </html>
   );
 }

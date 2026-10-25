@@ -1,10 +1,16 @@
 
 @import "tailwindcss";
 
+/* =========================
+   VARIABLES ET BASE
+========================= */
+
 :root {
   --background: #f8f9fc;
   --foreground: #20243a;
   --primary: #635bdb;
+  --primary-dark: #4c43c4;
+  --primary-light: #f0efff;
 }
 
 * {
@@ -13,6 +19,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -27,43 +34,133 @@ a {
   text-decoration: none;
 }
 
+button,
+input {
+  font: inherit;
+}
+
+/* =========================
+   NAVIGATION PRINCIPALE
+========================= */
+
 .navbar {
-  min-height: 76px;
-  padding: 18px 7%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  min-height: 82px;
+  padding: 16px 6%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  background: white;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.97);
   border-bottom: 1px solid #ececf3;
+  box-shadow: 0 4px 20px rgba(32, 36, 58, 0.05);
 }
 
+/* Logo à gauche */
+
 .logo {
-  font-size: 25px;
+  flex-shrink: 0;
+  color: var(--foreground);
+  font-size: 27px;
   font-weight: 800;
+  letter-spacing: -1px;
+  white-space: nowrap;
 }
 
 .logo span {
   color: var(--primary);
 }
 
-.navbar nav {
+/* Tous les boutons regroupés à droite */
+
+.main-nav {
   display: flex;
-  gap: 28px;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: auto;
 }
 
-.navbar nav a {
-  color: #62677a;
+/* Boutons Accueil, Catalogue, Contact et Connexion */
+
+.nav-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 43px;
+  padding: 11px 16px;
+  color: #ffffff;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
   font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
+.nav-button:hover {
+  color: #ffffff;
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow: 0 5px 12px rgba(99, 91, 219, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Bouton Panier */
 
 .cart {
-  padding: 10px 15px;
-  background: #f0efff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 43px;
+  padding: 11px 16px;
+  color: #ffffff;
+  background: var(--primary);
+  border: 1px solid var(--primary);
   border-radius: 12px;
-  font-weight: 700;
   font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
+.cart:hover {
+  color: #ffffff;
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  box-shadow: 0 5px 12px rgba(99, 91, 219, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Accessibilité : contour visible au clavier */
+
+.nav-button:focus-visible,
+.cart:focus-visible,
+.hero-button:focus-visible,
+.add-button:focus-visible {
+  outline: 3px solid rgba(99, 91, 219, 0.35);
+  outline-offset: 3px;
+}
+
+/* =========================
+   SECTION D'ACCUEIL
+========================= */
 
 .hero {
   padding: 90px 20px;
@@ -95,11 +192,23 @@ a {
   display: inline-block;
   margin-top: 22px;
   padding: 14px 22px;
-  color: white;
+  color: #ffffff;
   background: var(--primary);
   border-radius: 10px;
   font-weight: 700;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
+
+.hero-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   CATALOGUE
+========================= */
 
 .catalogue {
   max-width: 1150px;
@@ -124,16 +233,26 @@ a {
   font-size: 14px;
 }
 
+/* Barre de recherche */
+
 .search {
   width: 100%;
   margin: 20px 0;
   padding: 15px 18px;
-  background: white;
+  color: var(--foreground);
+  background: #ffffff;
   border: 1px solid #e3e5ed;
   border-radius: 10px;
   font-size: 15px;
   outline-color: var(--primary);
 }
+
+.search:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 91, 219, 0.1);
+}
+
+/* Filtres de catégories */
 
 .filters {
   display: flex;
@@ -144,17 +263,28 @@ a {
 
 .filter {
   padding: 10px 16px;
+  color: var(--foreground);
   border: 1px solid #e1e2ed;
   border-radius: 22px;
-  background: white;
+  background: #ffffff;
   cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.filter:hover {
+  border-color: var(--primary);
 }
 
 .filter.active {
   background: var(--primary);
-  color: white;
+  color: #ffffff;
   border-color: var(--primary);
 }
+
+/* Grille des produits */
 
 .products-grid {
   display: grid;
@@ -164,22 +294,24 @@ a {
 
 .product-card {
   overflow: hidden;
-  background: white;
+  background: #ffffff;
   border: 1px solid #ececf3;
   border-radius: 16px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px #20243a12;
+  box-shadow: 0 12px 30px rgba(32, 36, 58, 0.07);
 }
 
 .product-image {
   min-height: 175px;
   display: grid;
   place-items: center;
-  background: #f0efff;
+  background: var(--primary-light);
   font-size: 65px;
 }
 
@@ -210,50 +342,103 @@ a {
 
 .add-button {
   padding: 10px 12px;
+  color: #ffffff;
+  background: var(--primary);
   border: none;
   border-radius: 8px;
-  color: white;
-  background: var(--primary);
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.add-button:hover,
-.hero-button:hover {
-  background: #4c43c4;
+.add-button:hover {
+  background: var(--primary-dark);
 }
+
+/* Aucun résultat */
 
 .empty {
   padding: 35px 0;
-  text-align: center;
   color: #686d80;
+  text-align: center;
 }
+
+/* =========================
+   PIED DE PAGE
+========================= */
 
 footer {
   padding: 28px 16px;
-  text-align: center;
   color: #686d80;
-  background: white;
+  background: #ffffff;
   border-top: 1px solid #ececf3;
   font-size: 13px;
+  text-align: center;
 }
 
-@media (max-width: 800px) {
+footer p {
+  margin: 6px 0;
+}
+
+/* =========================
+   TABLETTES
+========================= */
+
+@media (max-width: 1050px) {
+  .navbar {
+    padding: 16px 4%;
+    gap: 16px;
+  }
+
+  .main-nav {
+    gap: 7px;
+  }
+
+  .nav-button,
+  .cart {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
   .products-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .navbar {
-    padding: 18px 5%;
-  }
 }
 
-@media (max-width: 520px) {
-  .navbar nav {
-    display: none;
+/* =========================
+   TÉLÉPHONES
+========================= */
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 15px 5%;
+    gap: 14px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .main-nav {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 0;
+    gap: 8px;
+  }
+
+  .nav-button,
+  .cart {
+    min-height: 40px;
+    padding: 9px 11px;
+    font-size: 12px;
   }
 
   .hero {
     padding: 65px 20px;
+  }
+
+  .hero h1 {
+    letter-spacing: -1px;
   }
 
   .products-grid {
@@ -263,4 +448,94 @@ footer {
   .catalogue {
     padding: 45px 18px 60px;
   }
+}
+
+/* Petits téléphones */
+
+@media (max-width: 380px) {
+  .navbar {
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .main-nav {
+    gap: 6px;
+  }
+
+  .nav-button,
+  .cart {
+    padding: 9px 8px;
+    font-size: 11px;
+  }
+
+  .section-heading h2 {
+    font-size: 26px;
+  }
+}
+
+
+/* =========================
+   PAGE 404
+========================= */
+
+.not-found {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.not-found-code {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(80px, 15vw, 140px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.not-found h1 {
+  margin: 20px 0 10px;
+  font-size: clamp(28px, 5vw, 40px);
+}
+
+.not-found > p:not(.not-found-code) {
+  max-width: 500px;
+  color: #686d80;
+  line-height: 1.7;
+}
+
+.not-found a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  color: #ffffff;
+  background: var(--primary);
+  border-radius: 12px;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+.not-found a:hover {
+  background: var(--primary-dark);
+}
+
+.navigation-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.navigation-actions .hero-button {
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
 }
